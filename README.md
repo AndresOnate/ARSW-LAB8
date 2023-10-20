@@ -47,10 +47,16 @@ Para esto, realice lo siguiente:
 	```javascript
 	var theObject=JSON.parse(message.body);
 	```
-3. Compile y ejecute su aplicación. Abra la aplicación en varias pestañas diferentes (para evitar problemas con el caché del navegador, use el modo 'incógnito' en cada prueba).
-4. Ingrese los datos, ejecute la acción del botón, y verifique que en todas la pestañas se haya lanzado la alerta con los datos ingresados.
 
-5. Haga commit de lo realizado, para demarcar el avance de la parte 2.
+ ![image](https://github.com/AndresOnate/ARSW-LAB8/assets/63562181/fca08774-d74e-4115-9f15-fda96ec2babd)
+
+3. Compile y ejecute su aplicación. Abra la aplicación en varias pestañas diferentes (para evitar problemas con el caché del navegador, use el modo 'incógnito' en cada prueba).
+
+   ![image](https://github.com/AndresOnate/ARSW-LAB8/assets/63562181/e42031c0-cabb-4b9e-8d72-42796e451912)
+
+5. Ingrese los datos, ejecute la acción del botón, y verifique que en todas la pestañas se haya lanzado la alerta con los datos ingresados.
+   
+7. Haga commit de lo realizado, para demarcar el avance de la parte 2.
 
 	```bash
 	git commit -m "PARTE 1".
