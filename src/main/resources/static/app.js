@@ -37,7 +37,10 @@ var app = (function () {
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
             stompClient.subscribe('/topic/newpoint', function (eventbody) {
-                alert(JSON.parse(eventbody.body).x, (eventbody.body).y);
+                var pointData = JSON.parse(eventbody.body);
+                var x = pointData.x;
+                var y = pointData.y;
+                alert('X: ' + x + ', Y: ' + y);
                 
             });
         });
