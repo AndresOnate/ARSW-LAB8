@@ -40,8 +40,8 @@ var app = (function () {
                 var pointData = JSON.parse(eventbody.body);
                 var x = pointData.x;
                 var y = pointData.y;
-                alert('X: ' + x + ', Y: ' + y);
-                
+                var point = new Point(x, y);
+                addPointToCanvas(point);
             });
         });
 
@@ -52,10 +52,22 @@ var app = (function () {
     return {
 
         init: function () {
-            var can = document.getElementById("canvas");
-            
-            //websocket connection
             connectAndSubscribe();
+            var can = document.getElementById("canvas");
+            var offset;
+            if(window.PointerEvent) {
+                can.addEventListener("pointerdown", function(event){
+                    offset  = getMousePosition(event);
+                    app.publishPoint(offset.x,offset.y);
+                });
+            } else {
+                canvas.addEventListener("mousedown", function(event){
+                    offset  = getMousePosition(event);
+                    app.publishPoint(offset.x,offset.y);
+                    
+                });
+        
+            }
         },
 
         publishPoint: function(px,py){
