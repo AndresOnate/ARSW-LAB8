@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="styles.css"> 
         <script src="/webjars/jquery/jquery.min.js"></script>
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
@@ -30,7 +31,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     
     <body onload="app.init()">   
-        <input id="drawId" type="number"/>  
+        <label for="drawId">Identificador:</label>
+        <input id="drawId" type="number"/>
+        <button id="connectButton">Conectar</button>  
         <canvas id="canvas" width="800" height="600"  style="border: 1px solid black;"></canvas>
     </body>
 </html>
