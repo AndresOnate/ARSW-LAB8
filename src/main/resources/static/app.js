@@ -28,6 +28,23 @@ var app = (function () {
         };
     };
 
+    var  drawPolygon = function(points) {
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.moveTo(points[0].x, points[0].y);
+        for (var i = 1; i < points.length; i++) {
+            ctx.lineTo(points[i].x, points[i].y);
+        }
+        ctx.closePath();
+        ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
+        ctx.fill();
+        ctx.strokeStyle = "blue";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    };
+
 
     var connectAndSubscribe = function (drawId) {
         console.info('Connecting to WS...');
@@ -45,6 +62,10 @@ var app = (function () {
                 var point = new Point(x, y);
                 addPointToCanvas(point);
             });
+            stompClient.subscribe('/topic/newpolygon.'+ drawId, function (eventbody) {
+                var polygonData = JSON.parse(eventbody.body);
+                drawPolygon(polygonData);
+            });
         });
 
     };
@@ -56,6 +77,8 @@ var app = (function () {
         init: function () {
             var can = document.getElementById("canvas");
             document.getElementById("connectButton").addEventListener("click", function () {
+                var ctx = can.getContext("2d");
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
                 drawId = document.getElementById("drawId").value;
                 connectAndSubscribe(drawId);
             });
@@ -79,7 +102,7 @@ var app = (function () {
             var pt=new Point(px,py);
             console.info("publishing point at "+pt);
             addPointToCanvas(pt);
-            var topic = '/topic/newpoint.' + drawId;
+            var topic = '/app/newpoint.' + drawId;
             stompClient.send(topic, {}, JSON.stringify(pt)); 
 
             //publicar el evento
